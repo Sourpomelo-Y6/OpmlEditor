@@ -90,7 +90,7 @@ namespace OpmlEditor
             this.fileFToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1067, 30);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -133,14 +133,14 @@ namespace OpmlEditor
             // 
             // toolStrip1
             // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton_Add,
             this.toolStripButton_AddInner,
             this.toolStripButton_Delete});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 30);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1067, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1067, 39);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -150,7 +150,7 @@ namespace OpmlEditor
             this.toolStripButton_Add.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Add.Image")));
             this.toolStripButton_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_Add.Name = "toolStripButton_Add";
-            this.toolStripButton_Add.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton_Add.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton_Add.Text = "Add";
             this.toolStripButton_Add.Click += new System.EventHandler(this.toolStripButton_Add_Click);
             // 
