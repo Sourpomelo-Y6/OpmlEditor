@@ -70,6 +70,25 @@ namespace OpmlEditor
         {
             if (treeView1.SelectedNode != null)
             {
+                GetSelNodeIndex();
+
+                Outline old = null;
+                Outline search = mainOpml.body.outlines[listNodeId[0]];
+                for (int i = 1; i < listNodeId.Count; i++)
+                {
+                    old = search;
+                    search = search.SubOutlines[listNodeId[i]];
+                }
+
+                if (old != null)
+                {
+                    old.SubOutlines.Remove(search);
+                }
+                else 
+                {
+                    mainOpml.body.outlines.Remove(search);
+                }
+
                 treeView1.SelectedNode.Remove();
                 treeView1.SelectedNode = null;
             }
