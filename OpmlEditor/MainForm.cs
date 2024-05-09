@@ -158,6 +158,11 @@ namespace OpmlEditor
         /// <param name="e"></param>
         private void saveSToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SaveOpmlFileDialog();
+        }
+
+        private void SaveOpmlFileDialog()
+        {
             //セーブ前に今書き込んだデータを保持
             if (old_cursor != null)
             {
@@ -178,6 +183,8 @@ namespace OpmlEditor
                 {
                     writer.Serialize(file, mainOpml);
                 }
+
+                dataChanged = false;
             }
         }
 
@@ -224,6 +231,8 @@ namespace OpmlEditor
 
         // 変数
         List<int> listNodeId = new List<int>();
+
+        public bool dataChanged { get; private set; }
 
         /// <summary>
         /// 選択ノードのIndexを取得
@@ -295,11 +304,45 @@ namespace OpmlEditor
 
             cursor.text = e.Label;
             cursor.title = e.Label;
+
+            dataChanged = true;
         }
 
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (dataChanged)
+            {
+                DialogResult result = MessageBox.Show(
+                  "ファイルが変更されています、保存しますか",
+                  "確認",
+                  MessageBoxButtons.YesNoCancel,
+                  MessageBoxIcon.Asterisk,
+                  MessageBoxDefaultButton.Button1
+                );
+
+                switch (result) 
+                {
+                    case DialogResult.Yes:
+                        SaveOpmlFileDialog();
+                        break;
+                    case DialogResult.No:
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                }
+                
+            }
+        }
+
+        private void txtMain_ModifiedChanged(object sender, EventArgs e)
+        {
+            dataChanged = true;
         }
     }
 }

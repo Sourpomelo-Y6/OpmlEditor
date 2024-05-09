@@ -72,6 +72,7 @@ namespace OpmlEditor
             this.txtMain.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtMain.Size = new System.Drawing.Size(677, 243);
             this.txtMain.TabIndex = 1;
+            this.txtMain.ModifiedChanged += new System.EventHandler(this.txtMain_ModifiedChanged);
             // 
             // statusStrip1
             // 
@@ -90,7 +91,7 @@ namespace OpmlEditor
             this.fileFToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -102,32 +103,32 @@ namespace OpmlEditor
             this.toolStripSeparator1,
             this.closeXToolStripMenuItem});
             this.fileFToolStripMenuItem.Name = "fileFToolStripMenuItem";
-            this.fileFToolStripMenuItem.Size = new System.Drawing.Size(63, 26);
+            this.fileFToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
             this.fileFToolStripMenuItem.Text = "File(&F)";
             // 
             // openOToolStripMenuItem
             // 
             this.openOToolStripMenuItem.Name = "openOToolStripMenuItem";
-            this.openOToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.openOToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.openOToolStripMenuItem.Text = "Open(&O)";
             this.openOToolStripMenuItem.Click += new System.EventHandler(this.openOToolStripMenuItem_Click);
             // 
             // saveSToolStripMenuItem
             // 
             this.saveSToolStripMenuItem.Name = "saveSToolStripMenuItem";
-            this.saveSToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.saveSToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.saveSToolStripMenuItem.Text = "Save(&S)";
             this.saveSToolStripMenuItem.Click += new System.EventHandler(this.saveSToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
             // 
             // closeXToolStripMenuItem
             // 
             this.closeXToolStripMenuItem.Name = "closeXToolStripMenuItem";
-            this.closeXToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.closeXToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.closeXToolStripMenuItem.Text = "Close(&X)";
             this.closeXToolStripMenuItem.Click += new System.EventHandler(this.closeXToolStripMenuItem_Click);
             // 
@@ -138,7 +139,7 @@ namespace OpmlEditor
             this.toolStripButton_Add,
             this.toolStripButton_AddInner,
             this.toolStripButton_Delete});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 30);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1067, 39);
             this.toolStrip1.TabIndex = 4;
@@ -160,7 +161,7 @@ namespace OpmlEditor
             this.toolStripButton_AddInner.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_AddInner.Image")));
             this.toolStripButton_AddInner.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_AddInner.Name = "toolStripButton_AddInner";
-            this.toolStripButton_AddInner.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButton_AddInner.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton_AddInner.Text = "Add_Inner";
             this.toolStripButton_AddInner.Click += new System.EventHandler(this.toolStripButton_AddInner_Click);
             // 
@@ -170,7 +171,7 @@ namespace OpmlEditor
             this.toolStripButton_Delete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Delete.Image")));
             this.toolStripButton_Delete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_Delete.Name = "toolStripButton_Delete";
-            this.toolStripButton_Delete.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButton_Delete.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton_Delete.Text = "Delete";
             this.toolStripButton_Delete.Click += new System.EventHandler(this.toolStripButton_Delete_Click);
             // 
@@ -198,6 +199,7 @@ namespace OpmlEditor
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "OpmlEditor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
