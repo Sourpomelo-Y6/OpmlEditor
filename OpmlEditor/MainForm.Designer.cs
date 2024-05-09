@@ -50,14 +50,18 @@ namespace OpmlEditor
             // 
             // treeView1
             // 
+            this.treeView1.LabelEdit = true;
             this.treeView1.Location = new System.Drawing.Point(16, 79);
             this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(347, 452);
             this.treeView1.TabIndex = 0;
+            this.treeView1.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_BeforeLabelEdit);
+            this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
             this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
+            this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
             // txtMain
             // 
@@ -86,7 +90,7 @@ namespace OpmlEditor
             this.fileFToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -134,9 +138,9 @@ namespace OpmlEditor
             this.toolStripButton_Add,
             this.toolStripButton_AddInner,
             this.toolStripButton_Delete});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 30);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1067, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(1067, 27);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -146,7 +150,7 @@ namespace OpmlEditor
             this.toolStripButton_Add.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Add.Image")));
             this.toolStripButton_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_Add.Name = "toolStripButton_Add";
-            this.toolStripButton_Add.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButton_Add.Size = new System.Drawing.Size(29, 24);
             this.toolStripButton_Add.Text = "Add";
             this.toolStripButton_Add.Click += new System.EventHandler(this.toolStripButton_Add_Click);
             // 

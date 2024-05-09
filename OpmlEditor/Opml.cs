@@ -11,6 +11,8 @@ namespace OpmlEditor
     [XmlRoot("opml")]
     public class Opml
     {
+        [XmlAttribute("version")]
+        public string version = "2.0";
         public Head head { get; set; }
         public Body body { get; set; }
     }

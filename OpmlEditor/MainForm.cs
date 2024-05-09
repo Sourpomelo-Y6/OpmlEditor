@@ -164,7 +164,7 @@ namespace OpmlEditor
 
         private void closeXToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         /// <summary>
@@ -254,6 +254,33 @@ namespace OpmlEditor
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <see cref="https://dobon.net/vb/dotnet/control/tvlabeledit.html"/>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView1_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
 
+        }
+
+        private void treeView1_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            GetSelNodeIndex();
+            Outline cursor = mainOpml.body.outlines[listNodeId[0]];
+            for (int i = 1; i < listNodeId.Count; i++)
+            {
+                cursor = cursor.SubOutlines[listNodeId[i]];
+            }
+
+            cursor.text = e.Label;
+            cursor.title = e.Label;
+        }
+
+        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            
+        }
     }
 }
