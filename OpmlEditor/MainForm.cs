@@ -75,9 +75,60 @@ namespace OpmlEditor
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <see cref="https://dobon.net/vb/dotnet/form/openfiledialog.html"/>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openOToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //OpenFileDialogクラスのインスタンスを作成
+            OpenFileDialog ofd = new OpenFileDialog();
 
+            //[ファイルの種類]に表示される選択肢を指定する
+            //指定しないとすべてのファイルが表示される
+            ofd.Filter = "OPMLファイル(*.opml)|*.opml|すべてのファイル(*.*)|*.*";
+
+            //ダイアログを表示する
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                System.Xml.Serialization.XmlSerializer reader =
+                    new System.Xml.Serialization.XmlSerializer(typeof(Opml));
+
+                using (var file = new System.IO.StreamReader(ofd.FileName))
+                {
+                    Opml opml = (Opml)reader.Deserialize(file);
+
+                    treeView1.Nodes.Clear();
+
+                    var outlines = opml.body.outlines;
+                    for (int i = 0; i < outlines.Count; i++) 
+                    {
+                        treeView1.Nodes.Add(outlines[i].title);
+
+                        SetTreeRecursive(outlines[i],treeView1.Nodes[i]);
+                        //var sub = outlines[i].SubOutlines;
+                        //for (int j = 0; j < sub.Count ; j++) 
+                        //{
+                        //    treeView1.Nodes[i].Nodes.Add(sub[j].title);
+                        
+                        //}
+                    }
+
+                    mainOpml = opml;
+                }
+            }
+        }
+
+        private void SetTreeRecursive(Outline outline, TreeNode treeNode)
+        {
+            var sub = outline.SubOutlines;
+            for (int j = 0; j < sub.Count; j++) 
+            {
+                treeNode.Nodes.Add(sub[j].title);
+                SetTreeRecursive(sub[j], treeNode.Nodes[j]);
+            }
         }
 
         /// <summary>
@@ -88,10 +139,16 @@ namespace OpmlEditor
         /// <param name="e"></param>
         private void saveSToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //セーブ前に今書き込んだデータを保持
+            if (old_cursor != null)
+            {
+                old_cursor.desctiption = txtMain.Text;
+            }
+
             //SaveFileDialogクラスのインスタンスを作成
             SaveFileDialog sfd = new SaveFileDialog();
 
-            sfd.Filter = "opmlファイル(*.opml)|*.opml|すべてのファイル(*.*)|*.*";
+            sfd.Filter = "OPMLファイル(*.opml)|*.opml|すべてのファイル(*.*)|*.*";
             //ダイアログを表示する
             if (sfd.ShowDialog() == DialogResult.OK)
             {
