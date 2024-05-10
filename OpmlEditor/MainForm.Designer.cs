@@ -241,7 +241,7 @@ namespace OpmlEditor
             this.toolStripButton_NextDo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_NextDo.Name = "toolStripButton_NextDo";
             this.toolStripButton_NextDo.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton_NextDo.Text = "toolStripButton2";
+            this.toolStripButton_NextDo.Text = "NextDo";
             this.toolStripButton_NextDo.Click += new System.EventHandler(this.toolStripButton_NextDo_Click);
             // 
             // toolStripSeparator3

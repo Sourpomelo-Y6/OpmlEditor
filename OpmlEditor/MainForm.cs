@@ -366,9 +366,48 @@ namespace OpmlEditor
             dataChanged = true;
         }
 
+        List<NodeAndLineNo> listNodeAndLineNo = new List<NodeAndLineNo>();
         private void toolStripButton_NextDo_Click(object sender, EventArgs e)
         {
+            //まずは全探索（でかいファイル弄るときやばそう）
+            listNodeAndLineNo.Clear();    
 
+            var outlines = mainOpml.body.outlines;
+            for (int i = 0; i < outlines.Count; i++)
+            {
+                List<int> listNodeNo = new List<int>();
+                listNodeNo.Add(i);
+
+                int hitline= outlines[i].desctiption.IndexOf("[ToDo]");
+                listNodeAndLineNo.Add(new NodeAndLineNo() { listNodeNo = new List<int>(listNodeNo) ,LineNo=hitline });
+
+                SearchToDoTreeRecursive(listNodeNo, outlines[i], treeView1.Nodes[i]);
+            }
+
+            txtDebug.AppendText("SearchTest:"+Environment.NewLine);
+            foreach (var item in listNodeAndLineNo)
+            {                
+                foreach (var item2 in item.listNodeNo) {
+                    txtDebug.AppendText(item2 + " "); 
+                }
+                txtDebug.AppendText("(" + item.LineNo + ")");
+                txtDebug.AppendText(Environment.NewLine);
+            }
+        }
+
+        private void SearchToDoTreeRecursive(List<int> listNodeNo, Outline outline, TreeNode treeNode)
+        {
+            var sub = outline.SubOutlines;
+            for (int j = 0; j < sub.Count; j++)
+            {
+                List<int> listNodeNo2 = new List<int>(listNodeNo);
+                listNodeNo2.Add(j);
+
+                int hitline = sub[j].desctiption.IndexOf("[ToDo]");
+                listNodeAndLineNo.Add(new NodeAndLineNo() { listNodeNo = new List<int>(listNodeNo2), LineNo = hitline });
+
+                SearchToDoTreeRecursive(listNodeNo2, sub[j], treeNode.Nodes[j]);
+            }
         }
     }
 }
