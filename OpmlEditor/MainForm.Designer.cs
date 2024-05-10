@@ -29,6 +29,7 @@ namespace OpmlEditor
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.txtMain = new System.Windows.Forms.TextBox();
@@ -44,17 +45,28 @@ namespace OpmlEditor
             this.toolStripButton_AddInner = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Delete = new System.Windows.Forms.ToolStripButton();
             this.txtDebug = new System.Windows.Forms.TextBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.toolStripButton_ToDo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton_NextDo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripTxtTimer = new System.Windows.Forms.ToolStripTextBox();
+            this.timerMain = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
             // 
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.LabelEdit = true;
-            this.treeView1.Location = new System.Drawing.Point(16, 79);
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(347, 452);
+            this.treeView1.Size = new System.Drawing.Size(347, 352);
             this.treeView1.TabIndex = 0;
             this.treeView1.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_BeforeLabelEdit);
             this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
@@ -65,12 +77,13 @@ namespace OpmlEditor
             // 
             // txtMain
             // 
-            this.txtMain.Location = new System.Drawing.Point(372, 79);
+            this.txtMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMain.Location = new System.Drawing.Point(0, 0);
             this.txtMain.Margin = new System.Windows.Forms.Padding(4);
             this.txtMain.Multiline = true;
             this.txtMain.Name = "txtMain";
             this.txtMain.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMain.Size = new System.Drawing.Size(677, 243);
+            this.txtMain.Size = new System.Drawing.Size(692, 352);
             this.txtMain.TabIndex = 1;
             this.txtMain.ModifiedChanged += new System.EventHandler(this.txtMain_ModifiedChanged);
             // 
@@ -91,7 +104,7 @@ namespace OpmlEditor
             this.fileFToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1067, 30);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -103,32 +116,32 @@ namespace OpmlEditor
             this.toolStripSeparator1,
             this.closeXToolStripMenuItem});
             this.fileFToolStripMenuItem.Name = "fileFToolStripMenuItem";
-            this.fileFToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
+            this.fileFToolStripMenuItem.Size = new System.Drawing.Size(63, 26);
             this.fileFToolStripMenuItem.Text = "File(&F)";
             // 
             // openOToolStripMenuItem
             // 
             this.openOToolStripMenuItem.Name = "openOToolStripMenuItem";
-            this.openOToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.openOToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
             this.openOToolStripMenuItem.Text = "Open(&O)";
             this.openOToolStripMenuItem.Click += new System.EventHandler(this.openOToolStripMenuItem_Click);
             // 
             // saveSToolStripMenuItem
             // 
             this.saveSToolStripMenuItem.Name = "saveSToolStripMenuItem";
-            this.saveSToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveSToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
             this.saveSToolStripMenuItem.Text = "Save(&S)";
             this.saveSToolStripMenuItem.Click += new System.EventHandler(this.saveSToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
             // 
             // closeXToolStripMenuItem
             // 
             this.closeXToolStripMenuItem.Name = "closeXToolStripMenuItem";
-            this.closeXToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.closeXToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
             this.closeXToolStripMenuItem.Text = "Close(&X)";
             this.closeXToolStripMenuItem.Click += new System.EventHandler(this.closeXToolStripMenuItem_Click);
             // 
@@ -138,8 +151,14 @@ namespace OpmlEditor
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton_Add,
             this.toolStripButton_AddInner,
-            this.toolStripButton_Delete});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStripButton_Delete,
+            this.toolStripSeparator3,
+            this.toolStripTxtTimer,
+            this.toolStripSeparator2,
+            this.toolStripButton_ToDo,
+            this.toolStripButton_NextDo});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 30);
+            this.toolStrip1.Margin = new System.Windows.Forms.Padding(5);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1067, 39);
             this.toolStrip1.TabIndex = 4;
@@ -177,24 +196,79 @@ namespace OpmlEditor
             // 
             // txtDebug
             // 
-            this.txtDebug.Location = new System.Drawing.Point(372, 329);
+            this.txtDebug.Location = new System.Drawing.Point(12, 428);
             this.txtDebug.Multiline = true;
             this.txtDebug.Name = "txtDebug";
             this.txtDebug.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDebug.Size = new System.Drawing.Size(677, 202);
+            this.txtDebug.Size = new System.Drawing.Size(1034, 109);
             this.txtDebug.TabIndex = 5;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Location = new System.Drawing.Point(12, 70);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.treeView1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.txtMain);
+            this.splitContainer1.Size = new System.Drawing.Size(1043, 352);
+            this.splitContainer1.SplitterDistance = 347;
+            this.splitContainer1.TabIndex = 6;
+            // 
+            // toolStripButton_ToDo
+            // 
+            this.toolStripButton_ToDo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_ToDo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_ToDo.Image")));
+            this.toolStripButton_ToDo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_ToDo.Name = "toolStripButton_ToDo";
+            this.toolStripButton_ToDo.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton_ToDo.Text = "ToDo";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
+            // 
+            // toolStripButton_NextDo
+            // 
+            this.toolStripButton_NextDo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_NextDo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_NextDo.Image")));
+            this.toolStripButton_NextDo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_NextDo.Name = "toolStripButton_NextDo";
+            this.toolStripButton_NextDo.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton_NextDo.Text = "toolStripButton2";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
+            // 
+            // toolStripTxtTimer
+            // 
+            this.toolStripTxtTimer.Font = new System.Drawing.Font("Yu Gothic UI", 9F);
+            this.toolStripTxtTimer.Name = "toolStripTxtTimer";
+            this.toolStripTxtTimer.ReadOnly = true;
+            this.toolStripTxtTimer.Size = new System.Drawing.Size(150, 39);
+            // 
+            // timerMain
+            // 
+            this.timerMain.Interval = 1000;
+            this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 562);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.txtDebug);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.txtMain);
-            this.Controls.Add(this.treeView1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
@@ -204,6 +278,10 @@ namespace OpmlEditor
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,6 +303,13 @@ namespace OpmlEditor
         private System.Windows.Forms.ToolStripButton toolStripButton_AddInner;
         private System.Windows.Forms.ToolStripButton toolStripButton_Delete;
         private System.Windows.Forms.TextBox txtDebug;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripTextBox toolStripTxtTimer;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton toolStripButton_ToDo;
+        private System.Windows.Forms.ToolStripButton toolStripButton_NextDo;
+        private System.Windows.Forms.Timer timerMain;
     }
 }
 

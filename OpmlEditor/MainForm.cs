@@ -28,6 +28,8 @@ namespace OpmlEditor
                     outlines = new List<Outline>()
                 }
             };
+
+            timerMain.Start();
         }
 
         private void toolStripButton_Add_Click(object sender, EventArgs e)
@@ -343,6 +345,11 @@ namespace OpmlEditor
         private void txtMain_ModifiedChanged(object sender, EventArgs e)
         {
             dataChanged = true;
+        }
+
+        private void timerMain_Tick(object sender, EventArgs e)
+        {
+            toolStripTxtTimer.Text = DateTime.Now.ToString();
         }
     }
 }
