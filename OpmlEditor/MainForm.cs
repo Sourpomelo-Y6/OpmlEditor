@@ -351,5 +351,24 @@ namespace OpmlEditor
         {
             toolStripTxtTimer.Text = DateTime.Now.ToString();
         }
+
+        private void toolStripButton_ToDo_Click(object sender, EventArgs e)
+        {
+            int now_cursor = txtMain.SelectionStart;
+
+            string workstr = txtMain.Text.Insert(now_cursor, "[ToDo]");
+
+            txtMain.Text = workstr;
+            //txtMain.Refresh();
+
+            txtMain.SelectionStart = now_cursor;
+
+            dataChanged = true;
+        }
+
+        private void toolStripButton_NextDo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
