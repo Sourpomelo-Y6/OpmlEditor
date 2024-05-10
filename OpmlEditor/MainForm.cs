@@ -11,6 +11,7 @@ namespace OpmlEditor
 {
     public partial class MainForm : Form
     {
+        Random rand;
         Opml mainOpml;
 
         public MainForm()
@@ -28,6 +29,8 @@ namespace OpmlEditor
                     outlines = new List<Outline>()
                 }
             };
+
+            rand = new Random();
 
             timerMain.Start();
         }
@@ -284,6 +287,47 @@ namespace OpmlEditor
             }
         }
 
+        // 最終的に選択したいノードを宣言
+        TreeNode selNode;
+
+        // 選択ノードのIndexを取得
+        private void SetSelNodeIndex(List<int> listNodeId)
+        {
+            // リストからトップ階層のノードを取得
+            TreeNode tnP = treeView1.Nodes[listNodeId[0]];
+            // 最終的に選択したいノードに一旦指定
+            selNode = tnP;
+
+            // リストのIndex指定用
+            int i = 1;
+
+            // リストに子のIndex情報がある場合
+            if (listNodeId.Count > i)
+            {
+                SetSelNodeRecursive(listNodeId,tnP, i);
+            }
+
+            treeView1.Focus();
+            treeView1.SelectedNode = selNode;
+        }
+        // 再帰処理
+        private void SetSelNodeRecursive(List<int> listNodeId, TreeNode tnP, int i)
+        {
+            // リストから1つ下の子ノードを取得
+            TreeNode tnC = tnP.Nodes[listNodeId[i]];
+            // 最終的に選択したいノードに指定
+            selNode = tnC;
+
+            // カウントアップ
+            i++;
+
+            // リストに子のIndex情報がある場合
+            if (listNodeId.Count > i)
+            {
+                SetSelNodeRecursive(listNodeId,tnC, i);
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -378,12 +422,16 @@ namespace OpmlEditor
                 List<int> listNodeNo = new List<int>();
                 listNodeNo.Add(i);
 
-                int hitline= outlines[i].desctiption.IndexOf("[ToDo]");
-                listNodeAndLineNo.Add(new NodeAndLineNo() { listNodeNo = new List<int>(listNodeNo) ,LineNo=hitline });
-
+                int hitline = outlines[i].desctiption.IndexOf("[ToDo]");
+                while (hitline > -1)
+                {
+                    listNodeAndLineNo.Add(new NodeAndLineNo() { listNodeNo = new List<int>(listNodeNo), LineNo = hitline });
+                    hitline = outlines[i].desctiption.IndexOf("[ToDo]",hitline+1);
+                }
                 SearchToDoTreeRecursive(listNodeNo, outlines[i], treeView1.Nodes[i]);
             }
 
+            //検索結果表示（デバック）
             txtDebug.AppendText("SearchTest:"+Environment.NewLine);
             foreach (var item in listNodeAndLineNo)
             {                
@@ -392,6 +440,22 @@ namespace OpmlEditor
                 }
                 txtDebug.AppendText("(" + item.LineNo + ")");
                 txtDebug.AppendText(Environment.NewLine);
+            }
+
+            //見つからない場合のメッセージボックス
+            if (listNodeAndLineNo.Count == 0) 
+            {
+                MessageBox.Show("Not Found!", "NextDo",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                //ランダムに選択
+                int select_rand = rand.Next(0, listNodeAndLineNo.Count);
+
+                SetSelNodeIndex(listNodeAndLineNo[select_rand].listNodeNo);
+                txtMain.Focus();
+                txtMain.SelectionStart = listNodeAndLineNo[select_rand].LineNo;
+                txtMain.SelectionLength = 6;
             }
         }
 
@@ -404,8 +468,11 @@ namespace OpmlEditor
                 listNodeNo2.Add(j);
 
                 int hitline = sub[j].desctiption.IndexOf("[ToDo]");
-                listNodeAndLineNo.Add(new NodeAndLineNo() { listNodeNo = new List<int>(listNodeNo2), LineNo = hitline });
-
+                while (hitline > -1)
+                {
+                    listNodeAndLineNo.Add(new NodeAndLineNo() { listNodeNo = new List<int>(listNodeNo2), LineNo = hitline });
+                    hitline = sub[j].desctiption.IndexOf("[ToDo]",hitline+1);
+                }
                 SearchToDoTreeRecursive(listNodeNo2, sub[j], treeNode.Nodes[j]);
             }
         }
