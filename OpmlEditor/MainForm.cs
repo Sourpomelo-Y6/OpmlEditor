@@ -396,12 +396,17 @@ namespace OpmlEditor
                 cursor = cursor.SubOutlines[listNodeId[i]];
             }
 
-            cursor.text = e.Label;
-            cursor.title = e.Label;
+            //変更がなされていない場合e.Labelはnull,(変更がある場合はその内容)
+            if (e.Label != null
+            && (cursor.text != e.Label
+            || cursor.title != e.Label))
+            {
+                cursor.text = e.Label;
+                cursor.title = e.Label;
 
-            //[ToDo]変更していないときの処理が抜けてる
+                dataChanged = true;
+            }
 
-            dataChanged = true;
         }
 
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
