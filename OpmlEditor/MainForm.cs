@@ -13,6 +13,7 @@ namespace OpmlEditor
     {
         Random rand;
         Opml mainOpml;
+        String nowFileName;
 
         public MainForm()
         {
@@ -31,6 +32,8 @@ namespace OpmlEditor
             };
 
             rand = new Random();
+
+            nowFileName = "";
 
             timerMain.Start();
         }
@@ -136,11 +139,12 @@ namespace OpmlEditor
                         //for (int j = 0; j < sub.Count ; j++) 
                         //{
                         //    treeView1.Nodes[i].Nodes.Add(sub[j].title);
-                        
+
                         //}
                     }
 
                     mainOpml = opml;
+                    nowFileName = ofd.FileName;
                 }
             }
         }
@@ -155,13 +159,51 @@ namespace OpmlEditor
             }
         }
 
+
+        private void saveSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveOrSaveAs();
+        }
+
+        void SaveOrSaveAs()
+        {
+            if (System.IO.File.Exists(nowFileName))
+            {
+                SaveOpmlFile();
+            }
+            else
+            {
+                SaveOpmlFileDialog();
+            }
+        }
+
+        private void SaveOpmlFile()
+        {
+            //セーブ前に今書き込んだデータを保持
+            if (old_cursor != null)
+            {
+                old_cursor.desctiption = txtMain.Text;
+            }
+
+            System.Xml.Serialization.XmlSerializer writer =
+                new System.Xml.Serialization.XmlSerializer(typeof(Opml));
+
+            using (var file = System.IO.File.Create(nowFileName))
+            {
+                writer.Serialize(file, mainOpml);
+            }
+
+            dataChanged = false;
+            
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <see cref="https://dobon.net/vb/dotnet/form/savefiledialog.html"/>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void saveSToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveAsAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveOpmlFileDialog();
         }
@@ -232,6 +274,12 @@ namespace OpmlEditor
             txtMain.Text = cursor.desctiption;
 
             old_cursor = cursor;
+
+            if (previousSelectedNode != null)
+            {
+                previousSelectedNode.BackColor = treeView1.BackColor;
+                previousSelectedNode.ForeColor = treeView1.ForeColor;
+            }
         }
 
         // 変数
@@ -351,6 +399,8 @@ namespace OpmlEditor
             cursor.text = e.Label;
             cursor.title = e.Label;
 
+            //[ToDo]変更していないときの処理が抜けてる
+
             dataChanged = true;
         }
 
@@ -374,9 +424,10 @@ namespace OpmlEditor
                 switch (result) 
                 {
                     case DialogResult.Yes:
-                        SaveOpmlFileDialog();
+                        SaveOrSaveAs();
                         break;
                     case DialogResult.No:
+                        //DoNothing
                         break;
                     case DialogResult.Cancel:
                         e.Cancel = true;
@@ -411,6 +462,8 @@ namespace OpmlEditor
         }
 
         List<NodeAndLineNo> listNodeAndLineNo = new List<NodeAndLineNo>();
+        private TreeNode previousSelectedNode;
+
         private void toolStripButton_NextDo_Click(object sender, EventArgs e)
         {
             //まずは全探索（でかいファイル弄るときやばそう）
@@ -453,6 +506,7 @@ namespace OpmlEditor
                 int select_rand = rand.Next(0, listNodeAndLineNo.Count);
 
                 SetSelNodeIndex(listNodeAndLineNo[select_rand].listNodeNo);
+
                 txtMain.Focus();
                 txtMain.SelectionStart = listNodeAndLineNo[select_rand].LineNo;
                 txtMain.SelectionLength = 6;
@@ -476,5 +530,23 @@ namespace OpmlEditor
                 SearchToDoTreeRecursive(listNodeNo2, sub[j], treeNode.Nodes[j]);
             }
         }
+        
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <see cref="https://www.web-dev-qa-db-ja.com/ja/c%23/treeview%E3%81%8C%E3%83%95%E3%82%A9%E3%83%BC%E3%82%AB%E3%82%B9%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%81%AA%E3%81%84%E3%81%A8%E3%81%8D%E3%81%ABtreenode%E3%81%8Cbackcolor%E3%82%92%E9%81%B8%E6%8A%9E%E3%81%97%E3%81%9F/1043868512/"/>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView1_Validating(object sender, CancelEventArgs e)
+        {
+            treeView1.SelectedNode.BackColor = SystemColors.Highlight;
+            treeView1.SelectedNode.ForeColor = Color.White;
+            previousSelectedNode = treeView1.SelectedNode;
+        }
+
+
+
+
     }
 }

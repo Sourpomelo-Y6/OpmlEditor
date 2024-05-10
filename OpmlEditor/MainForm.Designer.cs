@@ -52,6 +52,7 @@ namespace OpmlEditor
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTxtTimer = new System.Windows.Forms.ToolStripTextBox();
             this.timerMain = new System.Windows.Forms.Timer(this.components);
+            this.saveAsAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -74,6 +75,7 @@ namespace OpmlEditor
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+            this.treeView1.Validating += new System.ComponentModel.CancelEventHandler(this.treeView1_Validating);
             // 
             // txtMain
             // 
@@ -104,7 +106,7 @@ namespace OpmlEditor
             this.fileFToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -113,10 +115,11 @@ namespace OpmlEditor
             this.fileFToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openOToolStripMenuItem,
             this.saveSToolStripMenuItem,
+            this.saveAsAToolStripMenuItem,
             this.toolStripSeparator1,
             this.closeXToolStripMenuItem});
             this.fileFToolStripMenuItem.Name = "fileFToolStripMenuItem";
-            this.fileFToolStripMenuItem.Size = new System.Drawing.Size(63, 26);
+            this.fileFToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
             this.fileFToolStripMenuItem.Text = "File(&F)";
             // 
             // openOToolStripMenuItem
@@ -157,7 +160,7 @@ namespace OpmlEditor
             this.toolStripSeparator2,
             this.toolStripButton_ToDo,
             this.toolStripButton_NextDo});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 30);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Margin = new System.Windows.Forms.Padding(5);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1067, 39);
@@ -261,6 +264,13 @@ namespace OpmlEditor
             this.timerMain.Interval = 1000;
             this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
             // 
+            // saveAsAToolStripMenuItem
+            // 
+            this.saveAsAToolStripMenuItem.Name = "saveAsAToolStripMenuItem";
+            this.saveAsAToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveAsAToolStripMenuItem.Text = "Save as(&A)";
+            this.saveAsAToolStripMenuItem.Click += new System.EventHandler(this.saveAsAToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -312,6 +322,7 @@ namespace OpmlEditor
         private System.Windows.Forms.ToolStripButton toolStripButton_ToDo;
         private System.Windows.Forms.ToolStripButton toolStripButton_NextDo;
         private System.Windows.Forms.Timer timerMain;
+        private System.Windows.Forms.ToolStripMenuItem saveAsAToolStripMenuItem;
     }
 }
 
