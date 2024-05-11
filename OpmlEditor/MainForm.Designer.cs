@@ -52,6 +52,9 @@ namespace OpmlEditor
             this.toolStripButton_NextDo = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.timerMain = new System.Windows.Forms.Timer(this.components);
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton_Down = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Up = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -118,7 +121,7 @@ namespace OpmlEditor
             this.toolStripSeparator1,
             this.closeXToolStripMenuItem});
             this.fileFToolStripMenuItem.Name = "fileFToolStripMenuItem";
-            this.fileFToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
+            this.fileFToolStripMenuItem.Size = new System.Drawing.Size(63, 26);
             this.fileFToolStripMenuItem.Text = "File(&F)";
             // 
             // openOToolStripMenuItem
@@ -158,6 +161,9 @@ namespace OpmlEditor
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton_Up,
+            this.toolStripButton_Down,
+            this.toolStripSeparator4,
             this.toolStripButton_Add,
             this.toolStripButton_AddInner,
             this.toolStripButton_Delete,
@@ -213,7 +219,7 @@ namespace OpmlEditor
             this.toolStripTxtTimer.Font = new System.Drawing.Font("Yu Gothic UI", 9F);
             this.toolStripTxtTimer.Name = "toolStripTxtTimer";
             this.toolStripTxtTimer.ReadOnly = true;
-            this.toolStripTxtTimer.Size = new System.Drawing.Size(150, 39);
+            this.toolStripTxtTimer.Size = new System.Drawing.Size(160, 39);
             // 
             // toolStripSeparator2
             // 
@@ -261,6 +267,31 @@ namespace OpmlEditor
             // 
             this.timerMain.Interval = 1000;
             this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
+            // 
+            // toolStripButton_Down
+            // 
+            this.toolStripButton_Down.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_Down.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Down.Image")));
+            this.toolStripButton_Down.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Down.Name = "toolStripButton_Down";
+            this.toolStripButton_Down.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton_Down.Text = "Down";
+            this.toolStripButton_Down.Click += new System.EventHandler(this.toolStripButton_Down_Click);
+            // 
+            // toolStripButton_Up
+            // 
+            this.toolStripButton_Up.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_Up.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Up.Image")));
+            this.toolStripButton_Up.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Up.Name = "toolStripButton_Up";
+            this.toolStripButton_Up.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton_Up.Text = "up";
+            this.toolStripButton_Up.Click += new System.EventHandler(this.toolStripButton_Up_Click);
             // 
             // MainForm
             // 
@@ -313,6 +344,9 @@ namespace OpmlEditor
         private System.Windows.Forms.ToolStripButton toolStripButton_NextDo;
         private System.Windows.Forms.Timer timerMain;
         private System.Windows.Forms.ToolStripMenuItem saveAsAToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButton_Up;
+        private System.Windows.Forms.ToolStripButton toolStripButton_Down;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
 

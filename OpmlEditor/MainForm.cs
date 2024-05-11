@@ -65,6 +65,8 @@ namespace OpmlEditor
                     desctiption = "",
                     SubOutlines = new List<Outline>()
                 });
+
+            dataChanged = true;
         }
 
         private void toolStripButton_AddInner_Click(object sender, EventArgs e)
@@ -88,7 +90,10 @@ namespace OpmlEditor
                     desctiption = "",
                     SubOutlines = new List<Outline>()
                 });
+
+                dataChanged = true;
             }
+
         }
 
         private void toolStripButton_Delete_Click(object sender, EventArgs e)
@@ -116,6 +121,8 @@ namespace OpmlEditor
 
                 treeView1.SelectedNode.Remove();
                 treeView1.SelectedNode = null;
+
+                dataChanged = true;
             }
         }
 
@@ -578,5 +585,94 @@ namespace OpmlEditor
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <see cref="https://rimever.hatenablog.com/entry/2019/03/06/083000"/>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButton_Up_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode != null)
+            {
+                var treeNode = treeView1.SelectedNode;
+                var parentNode = treeNode.Parent;
+                var index = parentNode.Nodes.IndexOf(treeNode);
+
+                if (index <= 0)
+                {
+                    System.Media.SystemSounds.Exclamation.Play();
+                    return;
+                }
+
+                Outline old = null;
+                Outline search = mainOpml.body.outlines[listNodeId[0]];
+                for (int i = 1; i < listNodeId.Count; i++)
+                {
+                    old = search;
+                    search = search.SubOutlines[listNodeId[i]];
+                }
+                var work = search.Copy();
+
+                treeNode.Remove();
+                parentNode.Nodes.Insert(index - 1, treeNode);
+
+                if (old != null)
+                {
+                    old.SubOutlines.Remove(search);
+                    old.SubOutlines.Insert(index - 1, work);
+                }
+                else
+                {
+                    mainOpml.body.outlines.Remove(search);
+                    mainOpml.body.outlines.Insert(index - 1, work);
+                }
+
+                treeView1.SelectedNode = treeNode;
+                dataChanged = true;
+            }
+        }
+
+        private void toolStripButton_Down_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode != null)
+            {
+                var treeNode = treeView1.SelectedNode;
+                var parentNode = treeNode.Parent;
+                var index = parentNode.Nodes.IndexOf(treeNode);
+
+                if (index >= parentNode.Nodes.Count - 1) 
+                {
+                    System.Media.SystemSounds.Exclamation.Play();
+                    return;
+                }
+
+                Outline old = null;
+                Outline search = mainOpml.body.outlines[listNodeId[0]];
+                for (int i = 1; i < listNodeId.Count; i++)
+                {
+                    old = search;
+                    search = search.SubOutlines[listNodeId[i]];
+                }
+                var work = search.Copy();
+
+                treeNode.Remove();
+                parentNode.Nodes.Insert(index + 1, treeNode);
+
+                if (old != null)
+                {
+                    old.SubOutlines.Remove(search);
+                    old.SubOutlines.Insert(index + 1, work);
+                }
+                else
+                {
+                    mainOpml.body.outlines.Remove(search);
+                    mainOpml.body.outlines.Insert(index + 1, work);
+                }
+
+                treeView1.SelectedNode = treeNode;
+                dataChanged = true;
+            }
+        }
     }
 }

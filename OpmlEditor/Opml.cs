@@ -46,5 +46,16 @@ namespace OpmlEditor
         {
             SubOutlines = new List<Outline>();
         }
+
+        internal Outline Copy()
+        {
+            return new Outline() 
+            {
+                text=text,
+                desctiption=desctiption,
+                title=title,
+                SubOutlines = new List<Outline>(SubOutlines)
+            };
+        }
     }
 }
