@@ -55,18 +55,52 @@ namespace OpmlEditor
             Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //[ToDo]仕様の再考
         private void toolStripButton_Add_Click(object sender, EventArgs e)
         {
-            treeView1.Nodes.Add("test");
-            mainOpml.body.outlines.Add(
-                new Outline() {
-                    text = "test",
-                    title = "test",
-                    desctiption = "",
-                    SubOutlines = new List<Outline>()
-                });
+            if (treeView1.SelectedNode != null)
+            {
+                treeView1.SelectedNode.Parent.Nodes.Add("test_Same");
+                GetSelNodeIndex();
 
-            dataChanged = true;
+                Outline old = null;
+                Outline search = mainOpml.body.outlines[listNodeId[0]];
+                for (int i = 1; i < listNodeId.Count; i++)
+                {
+                    old = search;
+                    search = search.SubOutlines[listNodeId[i]];
+                }
+
+                if (old != null)
+                {
+                    old.SubOutlines.Add(
+                        new Outline()
+                        {
+                            text = "test",
+                            title = "test",
+                            desctiption = "",
+                            SubOutlines = new List<Outline>()
+                        });
+                }
+                else 
+                {
+                    mainOpml.body.outlines.Add(
+                        new Outline()
+                        {
+                            text = "test",
+                            title = "test",
+                            desctiption = "",
+                            SubOutlines = new List<Outline>()
+                        });
+                }
+
+                dataChanged = true;
+            }
         }
 
         private void toolStripButton_AddInner_Click(object sender, EventArgs e)
@@ -256,6 +290,8 @@ namespace OpmlEditor
                 }
 
                 dataChanged = false;
+
+                nowFileName = sfd.FileName;
             }
         }
 
@@ -488,6 +524,10 @@ namespace OpmlEditor
             //txtMain.Refresh();
 
             txtMain.SelectionStart = now_cursor;
+
+            txtMain.Focus();
+         
+            txtMain.ScrollToCaret();
 
             dataChanged = true;
         }
