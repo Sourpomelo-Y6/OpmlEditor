@@ -63,7 +63,8 @@ namespace OpmlEditor
         //[ToDo]仕様の再考
         private void toolStripButton_Add_Click(object sender, EventArgs e)
         {
-            if (treeView1.SelectedNode != null)
+            //Parentがある場合
+            if (treeView1.SelectedNode != null && treeView1.SelectedNode.Parent!=null)
             {
                 treeView1.SelectedNode.Parent.Nodes.Add("test_Same");
                 GetSelNodeIndex();
@@ -87,7 +88,7 @@ namespace OpmlEditor
                             SubOutlines = new List<Outline>()
                         });
                 }
-                else 
+                else
                 {
                     mainOpml.body.outlines.Add(
                         new Outline()
@@ -98,6 +99,20 @@ namespace OpmlEditor
                             SubOutlines = new List<Outline>()
                         });
                 }
+
+                dataChanged = true;
+            }
+            else//Parentがない場合はbody直下に追加する 
+            {
+                treeView1.Nodes.Add("test");
+                mainOpml.body.outlines.Add(
+                    new Outline()
+                    {
+                        text = "test",
+                        title = "test",
+                        desctiption = "",
+                        SubOutlines = new List<Outline>()
+                    });
 
                 dataChanged = true;
             }
