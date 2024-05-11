@@ -309,12 +309,12 @@ namespace OpmlEditor
             GetSelNodeRecursive(tnP);
 
             // ラベルに表示（とりあえず雑に）
-            foreach (var item in listNodeId)
-            {
-                txtDebug.AppendText(item.ToString() + " ");
-            }
+            //foreach (var item in listNodeId)
+            //{
+            //    txtDebug.AppendText(item.ToString() + " ");
+            //}
 
-            txtDebug.AppendText(Environment.NewLine);
+            //txtDebug.AppendText(Environment.NewLine);
         }
         
         /// <summary>
@@ -490,15 +490,15 @@ namespace OpmlEditor
             }
 
             //検索結果表示（デバック）
-            txtDebug.AppendText("SearchTest:"+Environment.NewLine);
-            foreach (var item in listNodeAndLineNo)
-            {                
-                foreach (var item2 in item.listNodeNo) {
-                    txtDebug.AppendText(item2 + " "); 
-                }
-                txtDebug.AppendText("(" + item.LineNo + ")");
-                txtDebug.AppendText(Environment.NewLine);
-            }
+            //txtDebug.AppendText("SearchTest:"+Environment.NewLine);
+            //foreach (var item in listNodeAndLineNo)
+            //{                
+            //    foreach (var item2 in item.listNodeNo) {
+            //        txtDebug.AppendText(item2 + " "); 
+            //    }
+            //    txtDebug.AppendText("(" + item.LineNo + ")");
+            //    txtDebug.AppendText(Environment.NewLine);
+            //}
 
             //見つからない場合のメッセージボックス
             if (listNodeAndLineNo.Count == 0) 
@@ -535,8 +535,8 @@ namespace OpmlEditor
                 SearchToDoTreeRecursive(listNodeNo2, sub[j], treeNode.Nodes[j]);
             }
         }
-        
-        
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -545,9 +545,13 @@ namespace OpmlEditor
         /// <param name="e"></param>
         private void treeView1_Validating(object sender, CancelEventArgs e)
         {
-            treeView1.SelectedNode.BackColor = SystemColors.Highlight;
-            treeView1.SelectedNode.ForeColor = Color.White;
-            previousSelectedNode = treeView1.SelectedNode;
+            //treeViewに何もないとき終了するとエラーが発生する
+            if (treeView1.Nodes.Count != 0)
+            {
+                treeView1.SelectedNode.BackColor = SystemColors.Highlight;
+                treeView1.SelectedNode.ForeColor = Color.White;
+                previousSelectedNode = treeView1.SelectedNode;
+            }
         }
 
 

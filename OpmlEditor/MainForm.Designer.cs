@@ -44,7 +44,6 @@ namespace OpmlEditor
             this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_AddInner = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Delete = new System.Windows.Forms.ToolStripButton();
-            this.txtDebug = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.toolStripButton_ToDo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -67,7 +66,7 @@ namespace OpmlEditor
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(347, 352);
+            this.treeView1.Size = new System.Drawing.Size(355, 471);
             this.treeView1.TabIndex = 0;
             this.treeView1.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_BeforeLabelEdit);
             this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
@@ -85,7 +84,7 @@ namespace OpmlEditor
             this.txtMain.Multiline = true;
             this.txtMain.Name = "txtMain";
             this.txtMain.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMain.Size = new System.Drawing.Size(692, 352);
+            this.txtMain.Size = new System.Drawing.Size(708, 471);
             this.txtMain.TabIndex = 1;
             this.txtMain.ModifiedChanged += new System.EventHandler(this.txtMain_ModifiedChanged);
             // 
@@ -106,7 +105,7 @@ namespace OpmlEditor
             this.fileFToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1067, 30);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -160,7 +159,7 @@ namespace OpmlEditor
             this.toolStripSeparator2,
             this.toolStripButton_ToDo,
             this.toolStripButton_NextDo});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 30);
             this.toolStrip1.Margin = new System.Windows.Forms.Padding(5);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1067, 39);
@@ -197,18 +196,10 @@ namespace OpmlEditor
             this.toolStripButton_Delete.Text = "Delete";
             this.toolStripButton_Delete.Click += new System.EventHandler(this.toolStripButton_Delete_Click);
             // 
-            // txtDebug
-            // 
-            this.txtDebug.Location = new System.Drawing.Point(12, 428);
-            this.txtDebug.Multiline = true;
-            this.txtDebug.Name = "txtDebug";
-            this.txtDebug.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDebug.Size = new System.Drawing.Size(1034, 109);
-            this.txtDebug.TabIndex = 5;
-            // 
             // splitContainer1
             // 
-            this.splitContainer1.Location = new System.Drawing.Point(12, 70);
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 69);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -218,8 +209,8 @@ namespace OpmlEditor
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtMain);
-            this.splitContainer1.Size = new System.Drawing.Size(1043, 352);
-            this.splitContainer1.SplitterDistance = 347;
+            this.splitContainer1.Size = new System.Drawing.Size(1067, 471);
+            this.splitContainer1.SplitterDistance = 355;
             this.splitContainer1.TabIndex = 6;
             // 
             // toolStripButton_ToDo
@@ -277,7 +268,6 @@ namespace OpmlEditor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 562);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.txtDebug);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -314,7 +304,6 @@ namespace OpmlEditor
         private System.Windows.Forms.ToolStripButton toolStripButton_Add;
         private System.Windows.Forms.ToolStripButton toolStripButton_AddInner;
         private System.Windows.Forms.ToolStripButton toolStripButton_Delete;
-        private System.Windows.Forms.TextBox txtDebug;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripTextBox toolStripTxtTimer;
