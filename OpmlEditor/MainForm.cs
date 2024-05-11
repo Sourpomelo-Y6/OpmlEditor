@@ -631,7 +631,7 @@ namespace OpmlEditor
         private void treeView1_Validating(object sender, CancelEventArgs e)
         {
             //treeViewに何もないとき終了するとエラーが発生する
-            if (treeView1.Nodes.Count != 0)
+            if (treeView1.SelectedNode != null)
             {
                 treeView1.SelectedNode.BackColor = SystemColors.Highlight;
                 treeView1.SelectedNode.ForeColor = Color.White;
@@ -728,6 +728,11 @@ namespace OpmlEditor
                 treeView1.SelectedNode = treeNode;
                 dataChanged = true;
             }
+        }
+
+        private void toolStripButton_Save_Click(object sender, EventArgs e)
+        {
+            SaveOrSaveAs();
         }
     }
 }
