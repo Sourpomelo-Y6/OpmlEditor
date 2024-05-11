@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,6 +13,13 @@ namespace OpmlEditor
 {
     public partial class MainForm : Form
     {
+        //https://qiita.com/murasuke/items/ddfc75493e1d4749836f
+        [DllImport("kernel32.dll")]
+        private static extern bool AllocConsole();
+
+        [DllImport("kernel32.dll")]
+        private static extern bool FreeConsole();
+
         Random rand;
         Opml mainOpml;
         String nowFileName;
@@ -36,6 +45,14 @@ namespace OpmlEditor
             nowFileName = "";
 
             timerMain.Start();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            // Console表示
+            AllocConsole();
+            // コンソールとstdoutの紐づけを行う。無くても初回は出力できるが、表示、非表示を繰り返すとエラーになる。
+            Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
         }
 
         private void toolStripButton_Add_Click(object sender, EventArgs e)
@@ -309,12 +326,14 @@ namespace OpmlEditor
             GetSelNodeRecursive(tnP);
 
             // ラベルに表示（とりあえず雑に）
-            //foreach (var item in listNodeId)
-            //{
-            //    txtDebug.AppendText(item.ToString() + " ");
-            //}
+            foreach (var item in listNodeId)
+            {
+                //txtDebug.AppendText(item.ToString() + " ");
+                Console.Write(item.ToString() + " ");
+            }
 
             //txtDebug.AppendText(Environment.NewLine);
+            Console.WriteLine();
         }
         
         /// <summary>
@@ -490,15 +509,19 @@ namespace OpmlEditor
             }
 
             //検索結果表示（デバック）
-            //txtDebug.AppendText("SearchTest:"+Environment.NewLine);
-            //foreach (var item in listNodeAndLineNo)
-            //{                
-            //    foreach (var item2 in item.listNodeNo) {
-            //        txtDebug.AppendText(item2 + " "); 
-            //    }
-            //    txtDebug.AppendText("(" + item.LineNo + ")");
-            //    txtDebug.AppendText(Environment.NewLine);
-            //}
+            //txtDebug.AppendText("SearchTest:" + Environment.NewLine);
+            Console.WriteLine("SearchTest:");
+            foreach (var item in listNodeAndLineNo)
+            {
+                foreach (var item2 in item.listNodeNo)
+                {
+                    //txtDebug.AppendText(item2 + " ");
+                    Console.Write(item2 + " ");
+                }
+                //txtDebug.AppendText("(" + item.LineNo + ")");
+                //txtDebug.AppendText(Environment.NewLine);
+                Console.WriteLine("(" + item.LineNo + ")");
+            }
 
             //見つからない場合のメッセージボックス
             if (listNodeAndLineNo.Count == 0) 
@@ -553,8 +576,6 @@ namespace OpmlEditor
                 previousSelectedNode = treeView1.SelectedNode;
             }
         }
-
-
 
 
     }

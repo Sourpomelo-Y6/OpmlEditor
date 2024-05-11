@@ -38,20 +38,20 @@ namespace OpmlEditor
             this.fileFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.closeXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_AddInner = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Delete = new System.Windows.Forms.ToolStripButton();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.toolStripButton_ToDo = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton_NextDo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTxtTimer = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton_ToDo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_NextDo = new System.Windows.Forms.ToolStripButton();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.timerMain = new System.Windows.Forms.Timer(this.components);
-            this.saveAsAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -124,26 +124,33 @@ namespace OpmlEditor
             // openOToolStripMenuItem
             // 
             this.openOToolStripMenuItem.Name = "openOToolStripMenuItem";
-            this.openOToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.openOToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.openOToolStripMenuItem.Text = "Open(&O)";
             this.openOToolStripMenuItem.Click += new System.EventHandler(this.openOToolStripMenuItem_Click);
             // 
             // saveSToolStripMenuItem
             // 
             this.saveSToolStripMenuItem.Name = "saveSToolStripMenuItem";
-            this.saveSToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.saveSToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.saveSToolStripMenuItem.Text = "Save(&S)";
             this.saveSToolStripMenuItem.Click += new System.EventHandler(this.saveSToolStripMenuItem_Click);
+            // 
+            // saveAsAToolStripMenuItem
+            // 
+            this.saveAsAToolStripMenuItem.Name = "saveAsAToolStripMenuItem";
+            this.saveAsAToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.saveAsAToolStripMenuItem.Text = "Save as(&A)";
+            this.saveAsAToolStripMenuItem.Click += new System.EventHandler(this.saveAsAToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(158, 6);
             // 
             // closeXToolStripMenuItem
             // 
             this.closeXToolStripMenuItem.Name = "closeXToolStripMenuItem";
-            this.closeXToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.closeXToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.closeXToolStripMenuItem.Text = "Close(&X)";
             this.closeXToolStripMenuItem.Click += new System.EventHandler(this.closeXToolStripMenuItem_Click);
             // 
@@ -196,6 +203,43 @@ namespace OpmlEditor
             this.toolStripButton_Delete.Text = "Delete";
             this.toolStripButton_Delete.Click += new System.EventHandler(this.toolStripButton_Delete_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
+            // 
+            // toolStripTxtTimer
+            // 
+            this.toolStripTxtTimer.Font = new System.Drawing.Font("Yu Gothic UI", 9F);
+            this.toolStripTxtTimer.Name = "toolStripTxtTimer";
+            this.toolStripTxtTimer.ReadOnly = true;
+            this.toolStripTxtTimer.Size = new System.Drawing.Size(150, 39);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
+            // 
+            // toolStripButton_ToDo
+            // 
+            this.toolStripButton_ToDo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_ToDo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_ToDo.Image")));
+            this.toolStripButton_ToDo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_ToDo.Name = "toolStripButton_ToDo";
+            this.toolStripButton_ToDo.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton_ToDo.Text = "ToDo";
+            this.toolStripButton_ToDo.Click += new System.EventHandler(this.toolStripButton_ToDo_Click);
+            // 
+            // toolStripButton_NextDo
+            // 
+            this.toolStripButton_NextDo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_NextDo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_NextDo.Image")));
+            this.toolStripButton_NextDo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_NextDo.Name = "toolStripButton_NextDo";
+            this.toolStripButton_NextDo.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton_NextDo.Text = "NextDo";
+            this.toolStripButton_NextDo.Click += new System.EventHandler(this.toolStripButton_NextDo_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -213,54 +257,10 @@ namespace OpmlEditor
             this.splitContainer1.SplitterDistance = 355;
             this.splitContainer1.TabIndex = 6;
             // 
-            // toolStripButton_ToDo
-            // 
-            this.toolStripButton_ToDo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_ToDo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_ToDo.Image")));
-            this.toolStripButton_ToDo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_ToDo.Name = "toolStripButton_ToDo";
-            this.toolStripButton_ToDo.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton_ToDo.Text = "ToDo";
-            this.toolStripButton_ToDo.Click += new System.EventHandler(this.toolStripButton_ToDo_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
-            // 
-            // toolStripButton_NextDo
-            // 
-            this.toolStripButton_NextDo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton_NextDo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_NextDo.Image")));
-            this.toolStripButton_NextDo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_NextDo.Name = "toolStripButton_NextDo";
-            this.toolStripButton_NextDo.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton_NextDo.Text = "NextDo";
-            this.toolStripButton_NextDo.Click += new System.EventHandler(this.toolStripButton_NextDo_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
-            // 
-            // toolStripTxtTimer
-            // 
-            this.toolStripTxtTimer.Font = new System.Drawing.Font("Yu Gothic UI", 9F);
-            this.toolStripTxtTimer.Name = "toolStripTxtTimer";
-            this.toolStripTxtTimer.ReadOnly = true;
-            this.toolStripTxtTimer.Size = new System.Drawing.Size(150, 39);
-            // 
             // timerMain
             // 
             this.timerMain.Interval = 1000;
             this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
-            // 
-            // saveAsAToolStripMenuItem
-            // 
-            this.saveAsAToolStripMenuItem.Name = "saveAsAToolStripMenuItem";
-            this.saveAsAToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.saveAsAToolStripMenuItem.Text = "Save as(&A)";
-            this.saveAsAToolStripMenuItem.Click += new System.EventHandler(this.saveAsAToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -276,6 +276,7 @@ namespace OpmlEditor
             this.Name = "MainForm";
             this.Text = "OpmlEditor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
