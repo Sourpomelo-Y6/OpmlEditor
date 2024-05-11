@@ -71,7 +71,7 @@ namespace OpmlEditor
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(355, 471);
+            this.treeView1.Size = new System.Drawing.Size(355, 473);
             this.treeView1.TabIndex = 0;
             this.treeView1.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_BeforeLabelEdit);
             this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
@@ -89,7 +89,7 @@ namespace OpmlEditor
             this.txtMain.Multiline = true;
             this.txtMain.Name = "txtMain";
             this.txtMain.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMain.Size = new System.Drawing.Size(708, 471);
+            this.txtMain.Size = new System.Drawing.Size(708, 473);
             this.txtMain.TabIndex = 1;
             this.txtMain.ModifiedChanged += new System.EventHandler(this.txtMain_ModifiedChanged);
             // 
@@ -110,7 +110,7 @@ namespace OpmlEditor
             this.fileFToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -176,7 +176,7 @@ namespace OpmlEditor
             this.toolStripSeparator2,
             this.toolStripButton_ToDo,
             this.toolStripButton_NextDo});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 30);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Margin = new System.Windows.Forms.Padding(5);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1067, 39);
@@ -278,7 +278,7 @@ namespace OpmlEditor
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 69);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 67);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -288,7 +288,7 @@ namespace OpmlEditor
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtMain);
-            this.splitContainer1.Size = new System.Drawing.Size(1067, 471);
+            this.splitContainer1.Size = new System.Drawing.Size(1067, 473);
             this.splitContainer1.SplitterDistance = 355;
             this.splitContainer1.TabIndex = 6;
             // 
@@ -321,6 +321,7 @@ namespace OpmlEditor
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";

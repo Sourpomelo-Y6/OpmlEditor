@@ -28,6 +28,10 @@ namespace OpmlEditor
         {
             InitializeComponent();
 
+            nowFileName = "";
+            
+            GetCommandLineArguments();
+
             mainOpml = new Opml()
             {
                 head = new Head()
@@ -42,8 +46,6 @@ namespace OpmlEditor
 
             rand = new Random();
 
-            nowFileName = "";
-
             timerMain.Start();
         }
 
@@ -53,6 +55,62 @@ namespace OpmlEditor
             AllocConsole();
             // コンソールとstdoutの紐づけを行う。無くても初回は出力できるが、表示、非表示を繰り返すとエラーになる。
             Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
+
+            Console.OutputEncoding = Encoding.GetEncoding("utf-8");
+
+            try
+            {
+                System.Xml.Serialization.XmlSerializer reader =
+                    new System.Xml.Serialization.XmlSerializer(typeof(Opml));
+
+                using (var file = new System.IO.StreamReader(nowFileName))
+                {
+                    Opml opml = (Opml)reader.Deserialize(file);
+
+                    treeView1.Nodes.Clear();
+
+                    var outlines = opml.body.outlines;
+                    for (int i = 0; i < outlines.Count; i++)
+                    {
+                        treeView1.Nodes.Add(outlines[i].title);
+
+                        SetTreeRecursive(outlines[i], treeView1.Nodes[i]);
+                    }
+
+                    mainOpml = opml;
+                }
+            }
+            catch (Exception ex) 
+            {
+                //MessageBox.Show(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        //https://umateku.com/archives/3040
+        /// <summary>
+        /// 
+        /// </summary>
+        private void GetCommandLineArguments()
+        {
+            // コマンドライン引数を取得
+            string[] args = Environment.GetCommandLineArgs();
+
+            // 引数をフォームに表示するための文字列変数を初期化
+            //string argsDisplay = "コマンドライン引数：\n";
+
+            // 取得した引数を1つずつ処理
+            //for (int i = 1; i < args.Length; i++) // iを1から始めることで、0番目（実行ファイルのパス）を除外
+            //{
+            //    argsDisplay += args[i] + "\n";
+            //}
+
+            // 引数を表示
+            //MessageBox.Show(argsDisplay, "引数情報");
+            if (args.Length > 1)
+            {
+                nowFileName = args[1];
+            }
         }
 
         /// <summary>
@@ -339,21 +397,23 @@ namespace OpmlEditor
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             GetSelNodeIndex();
-            
-            Outline cursor = mainOpml.body.outlines[listNodeId[0]];
-            for (int i = 1; i < listNodeId.Count; i++)
+            //if (mainOpml.body.outlines.Count != 0)
             {
-                cursor = cursor.SubOutlines[listNodeId[i]];
-            }
-            
-            txtMain.Text = cursor.desctiption;
+                Outline cursor = mainOpml.body.outlines[listNodeId[0]];
+                for (int i = 1; i < listNodeId.Count; i++)
+                {
+                    cursor = cursor.SubOutlines[listNodeId[i]];
+                }
 
-            old_cursor = cursor;
+                txtMain.Text = cursor.desctiption;
 
-            if (previousSelectedNode != null)
-            {
-                previousSelectedNode.BackColor = treeView1.BackColor;
-                previousSelectedNode.ForeColor = treeView1.ForeColor;
+                old_cursor = cursor;
+
+                if (previousSelectedNode != null)
+                {
+                    previousSelectedNode.BackColor = treeView1.BackColor;
+                    previousSelectedNode.ForeColor = treeView1.ForeColor;
+                }
             }
         }
 
