@@ -414,13 +414,18 @@ namespace OpmlEditor
                     previousSelectedNode.BackColor = treeView1.BackColor;
                     previousSelectedNode.ForeColor = treeView1.ForeColor;
                 }
+
+                nodeChanged = false;
+                toolStripStatusLabel_InputSpeedMinute.Text = "[stop]";
             }
         }
 
         // 変数
         List<int> listNodeId = new List<int>();
 
+        public bool nodeChanged { get; private set; }
         public bool dataChanged { get; private set; }
+        public int no_input_count { get; private set; }
 
         /// <summary>
         /// 選択ノードのIndexを取得
@@ -579,14 +584,109 @@ namespace OpmlEditor
             }
         }
 
+
+        string first_text = string.Empty;
+        DateTime first_text_timestamp = DateTime.Now;
+        string second_text = string.Empty;
+        DateTime second_text_timestamp = DateTime.Now;
+        
         private void txtMain_ModifiedChanged(object sender, EventArgs e)
         {
+            nodeChanged = true;
             dataChanged = true;
+            first_text = (sender as TextBox).Text;
+            first_text_timestamp = DateTime.Now;
+
+            second_text = (sender as TextBox).Text;
+            second_text_timestamp = DateTime.Now;
         }
 
+        bool qestion_dialog = false;
         private void timerMain_Tick(object sender, EventArgs e)
         {
             toolStripTxtTimer.Text = DateTime.Now.ToString();
+
+            if (nodeChanged == true)
+            {
+                //短くなっていたらそこを基準に変える
+                if (first_text.Length > txtMain.Text.Length)
+                {
+                    first_text = txtMain.Text;
+                    first_text_timestamp = DateTime.Now;
+                }
+
+                if (second_text.Length > txtMain.Text.Length)
+                {
+                    second_text = txtMain.Text;
+                    second_text_timestamp = DateTime.Now;
+                }
+
+                TimeSpan timeSpan = DateTime.Now - first_text_timestamp;
+                if (timeSpan.TotalMinutes > 1)
+                {
+                    int len = txtMain.Text.Length - first_text.Length;
+
+                    toolStripStatusLabel_InputSpeed.Text
+                        = string.Format("total:{0:F2}", len / timeSpan.TotalMinutes) + "char/min "
+                        + string.Format("{0}", len) + "char ";
+                }
+
+                TimeSpan timeSpan2 = DateTime.Now - second_text_timestamp;
+                //if (timeSpan2.TotalMinutes > 1)
+                {
+                    int len2 = txtMain.Text.Length - second_text.Length;
+
+                    toolStripStatusLabel_InputSpeedMinute.Text
+                        = string.Format("minute:{0} char", len2);
+
+                    if (timeSpan2.TotalMinutes > 1)
+                    {
+                        if (len2 == 0)
+                        {
+                            no_input_count++;
+                        }
+                        else
+                        {
+                            no_input_count = 0;
+                        }
+
+                        second_text = txtMain.Text;
+                        second_text_timestamp = DateTime.Now;
+                    }
+                }
+            }
+            else
+            {
+                TimeSpan timeSpan2 = DateTime.Now - second_text_timestamp;
+
+                //int len2 = txtMain.Text.Length - second_text.Length;
+                if (timeSpan2.TotalMinutes > 1)
+                {
+                    no_input_count++;
+                    second_text = txtMain.Text;
+                    second_text_timestamp = DateTime.Now;
+                }
+            }
+
+            if (qestion_dialog == false && no_input_count >= 10) 
+            {
+                qestion_dialog = true;
+                DialogResult result = MessageBox.Show("手が止まっていますよ？別な項目へ行きますか？",
+                                                      "質問",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Exclamation,
+                                                      MessageBoxDefaultButton.Button2);
+                if (result == DialogResult.Yes)
+                {
+                    toolStripButton_NextDo.PerformClick();
+                }
+                else if (result == DialogResult.No)
+                {
+                    
+                }
+                no_input_count = 0;
+                qestion_dialog = false;
+            }
         }
 
         private void toolStripButton_ToDo_Click(object sender, EventArgs e)
@@ -660,6 +760,9 @@ namespace OpmlEditor
                 txtMain.Focus();
                 txtMain.SelectionStart = listNodeAndLineNo[select_rand].LineNo;
                 txtMain.SelectionLength = 6;
+
+                nodeChanged = false;
+                toolStripStatusLabel_InputSpeedMinute.Text = "[stop]";
             }
         }
 
