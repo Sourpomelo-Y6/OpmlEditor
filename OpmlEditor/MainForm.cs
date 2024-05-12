@@ -416,6 +416,7 @@ namespace OpmlEditor
                 }
 
                 nodeChanged = false;
+                txtMain.Modified = false;
                 toolStripStatusLabel_InputSpeedMinute.Text = "[stop]";
             }
         }
@@ -762,6 +763,7 @@ namespace OpmlEditor
                 txtMain.SelectionLength = 6;
 
                 nodeChanged = false;
+                txtMain.Modified = false;
                 toolStripStatusLabel_InputSpeedMinute.Text = "[stop]";
             }
         }
@@ -896,6 +898,11 @@ namespace OpmlEditor
         private void toolStripButton_Save_Click(object sender, EventArgs e)
         {
             SaveOrSaveAs();
+        }
+
+        private void txtMain_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
