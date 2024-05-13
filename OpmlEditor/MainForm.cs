@@ -606,6 +606,7 @@ namespace OpmlEditor
         private void timerMain_Tick(object sender, EventArgs e)
         {
             toolStripTxtTimer.Text = DateTime.Now.ToString();
+            toolStripStatusLabel_CharNum.Text = txtMain.Text.Length + " charactor(s)";
 
             if (nodeChanged == true)
             {
@@ -698,7 +699,7 @@ namespace OpmlEditor
 
             txtMain.Text = workstr;
             //txtMain.Refresh();
-
+            toolStripStatusLabel_CharNum.Text = workstr.Length+ " charactor(s)";
             txtMain.SelectionStart = now_cursor;
 
             txtMain.Focus();

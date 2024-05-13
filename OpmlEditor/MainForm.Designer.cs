@@ -60,6 +60,7 @@ namespace OpmlEditor
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.timerMain = new System.Windows.Forms.Timer(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStripStatusLabel_CharNum = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -76,7 +77,7 @@ namespace OpmlEditor
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(355, 469);
+            this.treeView1.Size = new System.Drawing.Size(355, 467);
             this.treeView1.TabIndex = 0;
             this.treeView1.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_BeforeLabelEdit);
             this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
@@ -94,7 +95,7 @@ namespace OpmlEditor
             this.txtMain.Multiline = true;
             this.txtMain.Name = "txtMain";
             this.txtMain.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMain.Size = new System.Drawing.Size(708, 469);
+            this.txtMain.Size = new System.Drawing.Size(708, 467);
             this.txtMain.TabIndex = 1;
             this.txtMain.ModifiedChanged += new System.EventHandler(this.txtMain_ModifiedChanged);
             this.txtMain.TextChanged += new System.EventHandler(this.txtMain_TextChanged);
@@ -104,7 +105,8 @@ namespace OpmlEditor
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel_InputSpeedMinute,
-            this.toolStripStatusLabel_InputSpeed});
+            this.toolStripStatusLabel_InputSpeed,
+            this.toolStripStatusLabel_CharNum});
             this.statusStrip1.Location = new System.Drawing.Point(0, 536);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
@@ -131,7 +133,7 @@ namespace OpmlEditor
             this.fileFToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1067, 30);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -144,7 +146,7 @@ namespace OpmlEditor
             this.toolStripSeparator1,
             this.closeXToolStripMenuItem});
             this.fileFToolStripMenuItem.Name = "fileFToolStripMenuItem";
-            this.fileFToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
+            this.fileFToolStripMenuItem.Size = new System.Drawing.Size(63, 26);
             this.fileFToolStripMenuItem.Text = "File(&F)";
             // 
             // openOToolStripMenuItem
@@ -197,7 +199,7 @@ namespace OpmlEditor
             this.toolStripSeparator2,
             this.toolStripButton_ToDo,
             this.toolStripButton_NextDo});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 30);
             this.toolStrip1.Margin = new System.Windows.Forms.Padding(5);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1067, 39);
@@ -314,7 +316,7 @@ namespace OpmlEditor
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 67);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 69);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -324,7 +326,7 @@ namespace OpmlEditor
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtMain);
-            this.splitContainer1.Size = new System.Drawing.Size(1067, 469);
+            this.splitContainer1.Size = new System.Drawing.Size(1067, 467);
             this.splitContainer1.SplitterDistance = 355;
             this.splitContainer1.TabIndex = 6;
             // 
@@ -332,6 +334,12 @@ namespace OpmlEditor
             // 
             this.timerMain.Interval = 1000;
             this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
+            // 
+            // toolStripStatusLabel_CharNum
+            // 
+            this.toolStripStatusLabel_CharNum.Name = "toolStripStatusLabel_CharNum";
+            this.toolStripStatusLabel_CharNum.Size = new System.Drawing.Size(71, 20);
+            this.toolStripStatusLabel_CharNum.Text = "CharNum";
             // 
             // MainForm
             // 
@@ -396,6 +404,7 @@ namespace OpmlEditor
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_InputSpeed;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_InputSpeedMinute;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_CharNum;
     }
 }
 
