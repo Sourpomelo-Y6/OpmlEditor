@@ -711,8 +711,17 @@ namespace OpmlEditor
             if (treeView1.SelectedNode != null)
             {
                 var treeNode = treeView1.SelectedNode;
-                var parentNode = treeNode.Parent;
-                var index = parentNode.Nodes.IndexOf(treeNode);
+                TreeNodeCollection parentNodes;
+                if (treeNode.Parent == null)
+                {
+                    parentNodes = treeView1.Nodes;
+                }
+                else 
+                {
+                    parentNodes = treeNode.Parent.Nodes;
+                }
+
+                var index = parentNodes.IndexOf(treeNode);
 
                 if (index <= 0)
                 {
@@ -730,7 +739,7 @@ namespace OpmlEditor
                 var work = search.Copy();
 
                 treeNode.Remove();
-                parentNode.Nodes.Insert(index - 1, treeNode);
+                parentNodes.Insert(index - 1, treeNode);
 
                 if (old != null)
                 {
@@ -753,10 +762,19 @@ namespace OpmlEditor
             if (treeView1.SelectedNode != null)
             {
                 var treeNode = treeView1.SelectedNode;
-                var parentNode = treeNode.Parent;
-                var index = parentNode.Nodes.IndexOf(treeNode);
+                TreeNodeCollection parentNodes;
+                if (treeNode.Parent == null)
+                {
+                    parentNodes = treeView1.Nodes;
+                }
+                else
+                {
+                    parentNodes = treeNode.Parent.Nodes;
+                }
 
-                if (index >= parentNode.Nodes.Count - 1) 
+                var index = parentNodes.IndexOf(treeNode);
+
+                if (index >= parentNodes.Count - 1) 
                 {
                     System.Media.SystemSounds.Exclamation.Play();
                     return;
@@ -772,7 +790,7 @@ namespace OpmlEditor
                 var work = search.Copy();
 
                 treeNode.Remove();
-                parentNode.Nodes.Insert(index + 1, treeNode);
+                parentNodes.Insert(index + 1, treeNode);
 
                 if (old != null)
                 {
